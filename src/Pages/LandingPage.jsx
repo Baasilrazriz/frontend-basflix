@@ -1,8 +1,11 @@
-import React, { useEffect, useState, startTransition } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState, startTransition, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { CloseUserDropdown, toggleUserDropdown } from '../Store/Features/loginSlice';
+import { userHistory } from '../Store/Features/movieSlice';
 
 function LandingPage() {
+  const dispatch = useDispatch();
   const bg = useSelector((state) => state.landing.bg);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const sections = useSelector((state) => state.landing.sections);
