@@ -6,10 +6,45 @@ function LandingPage() {
   const bg = useSelector((state) => state.landing.bg);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const sections = useSelector((state) => state.landing.sections);
+  const profilepic = useSelector((state) => state.login.profilepic);
+  const username = useSelector((state) => state.login.username);
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const userDropdownOpen = useSelector((state) => state.login.userDropdownOpen);
   const userDropdownRef = useRef(null);
+  const handleSignOut = () => {
+    Cookies.remove("loggedIn");
+    Cookies.remove("username");
+    Cookies.remove("profilePic");
+    localStorage.clear();
+    dispatch(setRememberMe(false));
+    window.location.reload();
+  };
+  const  handlehistoryClick= async() => {
+    
+    if(statusmovieUserHistory==="idle")
+      {
+       await dispatch(userHistory(rememberMe))
+       
+      }
+      
+      dispatch(CloseUserDropdown())
+      startTransition(() => {
+        navigate("/history")
+        }
+          )
+  };
+  const  handleFavClick= () => {
+      
+      dispatch(CloseUserDropdown())
+      startTransition(() => {
+        navigate("/favourites")
+        }
+          )
+  };
+  const handleOpenLoginModal = () => {
+    dispatch(toggleUserDropdown());
+  };
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0); // Check if scrolled past top
