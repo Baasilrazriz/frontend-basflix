@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const base_url="https://movie-recomendation-system-dab2e94e9735.herokuapp.com/";
+const base_url="https://movie-recomendation-system-dab2e94e9735.herokuapp.com";
 export const recommendMoviesByCategory = createAsyncThunk(
   "movies/recommendMoviesByCategory",
   async ({ categories, rememberMe }, { rejectWithValue }) => {

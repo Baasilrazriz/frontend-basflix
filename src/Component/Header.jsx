@@ -26,7 +26,7 @@ const Header = () => {
   const status = useSelector((state) => state.search.status);
   const userDropdownOpen = useSelector((state) => state.login.userDropdownOpen);
   const userDropdownRef = useRef(null);
-  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0); // New state variable
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1); // New state variable
   const navigate = useNavigate();
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -92,12 +92,15 @@ const Header = () => {
     if (e.key === "ArrowDown") {
       setActiveSuggestionIndex((prevIndex) => Math.min(prevIndex + 1, suggestions.length - 1));
     } else if (e.key === "ArrowUp") {
-      setActiveSuggestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      setActiveSuggestionIndex((prevIndex) => Math.max(prevIndex - 1, -1));
     } else if (e.key === "Enter") {
+      performSearch(search);
       const suggestion = suggestions[activeSuggestionIndex];
       if (suggestion) {
+        setSearch(suggestion)
         performSearch(suggestion);
       }
+
     } else if (e.key === "Backspace"  ) {
       if(search === "")
         {
@@ -121,24 +124,30 @@ const Header = () => {
       }
     };
   const handleSearchClick= (e) => {
-    setSearch(e.target.value);
+    
     setIsSearchActive(true); // Show suggestions when search bar is clicked
     if(status==="idle"||status==="succeeded")
       {
          dispatch(fetchSuggestions({ input: e.target.value,username:username ,rememberMe:rememberMe }));
       }
+        
   };
+  
   const handleSuggestionClick = (suggestion) => {
     setSearch(suggestion);
     performSearch(suggestion);
   };
+  const OnSearchClick = (e) => {
+    setIsSearchActive(true); // Show suggestions when search bar is clicked
+    performSearch(search); // Perform the search operation
+  };
+
   const performSearch = (searchTerm) => {
-    setIsSearchActive(false);
-    navigate("/search");
-    dispatch(activeSearch(searchTerm));
-    
-    dispatch(on_change_search({ search_input: searchTerm }));
-    dispatch(recommendMoviesByName({ movieName: searchTerm }));
+    setIsSearchActive(false); // Hide suggestions during the search
+    navigate("/search"); // Navigate to the search page
+    dispatch(activeSearch(searchTerm)); // Dispatch action for active search
+    dispatch(on_change_search({ search_input: searchTerm })); // Dispatch action for changing search input
+    dispatch(recommendMoviesByName({ movieName: searchTerm })); // Dispatch action for recommending movies
   };
   
   const handleOpenLoginModal = () => {
@@ -180,7 +189,9 @@ const Header = () => {
     )}
 
 
-            <button className="absolute top-1/2 right-4 transform -translate-y-1/2 transition-transform duration-300 ease-in-out hover:scale-110">
+            <button className="absolute top-1/2 right-4 transform -translate-y-1/2 transition-transform duration-300 ease-in-out hover:scale-110"
+            onClick={OnSearchClick}
+            >
               <svg
                 className="w-6 h-6 text-gray-400"
                 fill="none"
