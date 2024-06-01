@@ -30,7 +30,11 @@ const HeroSection = (props) => {
           <h1 className="text-5xl font-bold">{props.movie.movie_title || "HOUSE OF NINJAS"}</h1>
           <p className="mt-4 text-lg">Years after retiring from their ninja lives, a dysfunctional family must return to the shadows...</p>
           <div className="mt-4 space-x-2">
-            <a className="bg-gradient-to-r from-red-800 to-red-600 text-white hover:scale-95 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-500 px-4 py-2 font-bold rounded" href={props.movie.movie_imdb_link || "http://www.imdb.com/title/tt0325980/?ref_=fn_tt_tt_1"} >Play</a>
+            <a className="bg-gradient-to-r from-red-800 to-red-600 text-white hover:scale-95 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-500 px-4 py-2 font-bold rounded" 
+            href={props.movie.movie_imdb_link || "http://www.imdb.com/title/tt0325980/?ref_=fn_tt_tt_1"} 
+            target="_blank"
+            rel="noopener noreferrer" 
+            >Play</a>
             {props.page==="home"? <button onClick={() => handleMovieClick(props.movie)} className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-4 py-2 font-bold rounded hover:bg-gradient-to-r hover:from-gray-600 hover:to-gray-500">More Info</button>:<></>}  
           </div>
         </div>

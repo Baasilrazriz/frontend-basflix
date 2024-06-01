@@ -53,6 +53,8 @@ const MovieModal = () => {
                 <div className="mt-4 space-x-2 flex justify-center">
                   <a
                     className="bg-gradient-to-r from-red-800 to-red-600 text-white font-bold px-20 md:px-44 py-2 md:py-4 rounded-md hover:scale-95 hover:bg-gradient-to-r hover:from-red-600 hover:to-red-500"
+                    target="_blank"
+                       rel="noopener noreferrer" 
                     href={
                       selectedMovie.movie_imdb_link ||
                       "http://www.imdb.com/title/tt0325980/?ref_=fn_tt_tt_1"
