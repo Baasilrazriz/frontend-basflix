@@ -101,6 +101,7 @@ const Header = () => {
     } else if (e.key === "Backspace"  ) {
       if(search === "")
         {
+          navigate('/home')
           dispatch(deactiveSearch());
           setIsSearchActive(false);
         }
@@ -133,6 +134,7 @@ const Header = () => {
   };
   const performSearch = (searchTerm) => {
     setIsSearchActive(false);
+    navigate("/search");
     dispatch(activeSearch(searchTerm));
     
     dispatch(on_change_search({ search_input: searchTerm }));

@@ -47,13 +47,7 @@ function HomePage() {
     <>
       <div className="bg-black min-h-screen">
         <Header />
-        {isSearchActive ? (
-          <SearchContent />
-        ) : (
-          <>
           <MovieContent />
-          </>
-        )}
       </div>
       <MovieModal />
     </>

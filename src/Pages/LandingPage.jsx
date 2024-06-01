@@ -3,15 +3,49 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { CloseUserDropdown, toggleUserDropdown } from '../Store/Features/loginSlice';
 import { userHistory } from '../Store/Features/movieSlice';
-
+import Cookies from "js-cookie";
 function LandingPage() {
   const dispatch = useDispatch();
   const bg = useSelector((state) => state.landing.bg);
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target) 
+        
+      ) {
+        dispatch(CloseUserDropdown  ());
+        
+      }
+    };
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [dispatch]);
+
+  const rememberMe = useSelector((state) => state.login.rememberMe);  
   const sections = useSelector((state) => state.landing.sections);
-  const profilepic = useSelector((state) => state.login.profilepic);
-  const username = useSelector((state) => state.login.username);
+  let isLoggedIn ;
+  let profilepic;
+  let usernames ;
+
   const navigate = useNavigate();
+  
+    // Check if user is already logged in via cookies
+    const loggedIn = Cookies.get("loggedIn");
+    const username = Cookies.get("username");
+    const profilePic = Cookies.get("profilePic");
+    
+    if (loggedIn) {
+    isLoggedIn=loggedIn;
+    profilepic=profilePic;
+    usernames=username;
+        
+    
+    }
+  
+console.log(isLoggedIn)
   const [isScrolled, setIsScrolled] = useState(false);
   const userDropdownOpen = useSelector((state) => state.login.userDropdownOpen);
   const userDropdownRef = useRef(null);
@@ -57,6 +91,12 @@ function LandingPage() {
 
     return () => window.removeEventListener('scroll', handleScroll); // Cleanup
   }, []);
+useEffect(() => {
+
+  const loggedIn = Cookies.get("loggedIn");
+  const username = Cookies.get("username");
+  const profilePic = Cookies.get("profilePic");
+}, [])
 
   const handleSignInClick = () => {
     startTransition(() => {
@@ -92,7 +132,7 @@ navigate('/login');
             <div class="  absolute right-0  z-[999] px-fit   my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-700 dark:divide-gray-600">
               <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900 text-nowrap dark:text-white">
-                  {username}
+                  {usernames}
                 </span>
               </div>
               <ul class="py-2" aria-labelledby="user-menu-button">

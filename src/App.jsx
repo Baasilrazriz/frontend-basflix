@@ -6,6 +6,7 @@ import NotFound from './Pages/NotFound'
 
 import HistoryPage from './Pages/HistoryPage'
 import FavouritesPage from './Pages/FavouritesPage'
+import SearchPage from './Pages/SearchPage'
 const HomePage = lazy(() => import('./Pages/HomePage'));
 const LoginPage = lazy(() => import('./Pages/LoginPage'));
 const LandingPage = lazy(() => import('./Pages/LandingPage'));
@@ -25,6 +26,7 @@ function App() {
     <Route path='/home' element={<HomePage/>}/> 
     <Route path='/history' element={<HistoryPage/>}/> 
     <Route path='/favourites' element={<FavouritesPage/>}/> 
+    <Route path='/search' element={<SearchPage/>}/> 
       </Route>    
    </Routes>
    </BrowserRouter>
