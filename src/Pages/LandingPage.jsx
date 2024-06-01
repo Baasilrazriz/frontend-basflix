@@ -112,7 +112,7 @@ navigate('/login');
   return (
     <div id="Landing" className="bg-gray-600 relative min-h-screen text-white flex flex-col items-center justify-center overflow-hidden">
       <div className="w-screen h-[99vh]" style={{ backgroundImage: `${bg}` }}>
-        <header className={`z-50 w-screen p-6 px-20 flex justify-between items-center ${isScrolled ? 'backdrop-blur-xl' : 'backdrop-blur-xs'} bg-transparent fixed top-0`}>
+        <header className={`z-50 w-screen p-6 md:px-20 flex justify-between items-center ${isScrolled ? 'backdrop-blur-xl' : 'backdrop-blur-xs'} bg-transparent fixed top-0`}>
           <NavLink to='/' className="text-red-600 text-4xl font-bold">BASFLIX</NavLink>
           {isLoggedIn?<>
             <div className="relative flex-col " ref={userDropdownRef}>
