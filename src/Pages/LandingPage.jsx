@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { CloseUserDropdown, toggleUserDropdown } from '../Store/Features/loginSlice';
 import { userHistory } from '../Store/Features/movieSlice';
 import Cookies from "js-cookie";
+import Footer from '../Component/Footer';
 function LandingPage() {
   const dispatch = useDispatch();
   const bg = useSelector((state) => state.landing.bg);
@@ -110,8 +111,8 @@ navigate('/login');
   };
 
   return (
-    <div id="Landing" className="bg-gray-600 relative min-h-screen text-white flex flex-col items-center justify-center overflow-hidden">
-      <div className="w-screen h-[99vh]" style={{ backgroundImage: `${bg}` }}>
+    <div id="Landing" className="bg-gray-600  relative min-h-screen text-white flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-screen h-[99.4vh]" style={{ backgroundImage: `${bg}` }}>
         <header className={`z-50 w-screen p-6 md:px-20 flex justify-between items-center ${isScrolled ? 'backdrop-blur-xl' : 'backdrop-blur-xs'} bg-transparent fixed top-0`}>
           <NavLink to='/' className="text-red-600 text-4xl font-bold">BASFLIX</NavLink>
           {isLoggedIn?<>
@@ -180,14 +181,16 @@ navigate('/login');
         </main>
       </div>
       <div className='w-screen'>
-        <div className='mt-2'>
+        <div className='mt-1'>
           {sections.map((sec) => (
             <div className='bg-black' id={sec.name} key={sec.name}>
               <img className='h-full w-full object-cover' src={sec.image} alt={sec.name} />
             </div>
           ))}
         </div>
+
       </div>
+      
     </div>
   );
 }

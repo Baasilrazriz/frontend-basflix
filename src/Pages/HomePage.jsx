@@ -8,6 +8,7 @@ import LoadingScreen from '../Component/LoadingScreen';
 
 import MovieContent from '../Component/MovieContent';
 import SearchContent from '../Component/SearchContent';
+import Footer from '../Component/Footer';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -48,6 +49,11 @@ function HomePage() {
       <div className="bg-black min-h-screen">
         <Header />
           <MovieContent />
+          
+        <div className='mt-1'>
+        <Footer/>
+        </div>
+      
       </div>
       <MovieModal />
     </>

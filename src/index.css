@@ -17,3 +17,27 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+html
+{
+
+}
+html::-webkit-scrollbar{
+  width: 1vw;
+  
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color:rgb(255, 0, 0) ;
+  background-clip: padding-box;
+  border-width: 4px; /* Set the width of the border */
+  border-style: solid;
+  border-color: transparent;
+  
+  border-radius:10px;
+   
+}
+html::-webkit-scrollbar-track {
+  background-color:black ;
+  backdrop-filter: blur(20px);
+  
+}
