@@ -190,7 +190,9 @@ navigate('/login');
         </div>
 
       </div>
-      
+      <div className='mt-1'>
+        <Footer/>
+      </div>
     </div>
   );
 }
