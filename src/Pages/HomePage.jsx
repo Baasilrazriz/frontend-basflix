@@ -50,9 +50,6 @@ function HomePage() {
         <Header />
           <MovieContent />
           
-        <div className='mt-1'>
-        <Footer/>
-        </div>
       
       </div>
       <MovieModal />
