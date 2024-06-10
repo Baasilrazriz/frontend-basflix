@@ -85,7 +85,6 @@ export const userHistory = createAsyncThunk(
       const response = await axios.get(
         `${base_url}/user_history`
       );
-
       if (rememberMe) {
         localStorage.setItem(
           "userHistory",
@@ -125,15 +124,14 @@ export const top_rated_movies = createAsyncThunk(
   }
 );
 
-
 const movieSlice = createSlice({
-  name: "movie  ",
+  name: "movie",
   initialState: {
     moviesByCategory: {},
     moviesByName: [],
     MoviesRecommended: [],
     MoviesTopRated: [],
-    movieUserHistory: [],
+    movieUserHistory: {},
     statusCatMovies: "idle",
     statusmovieUserHistory: "idle",
     statusRecommendedMovies: "idle",
@@ -165,6 +163,9 @@ const movieSlice = createSlice({
   activeHistory: (state) => {
       state.isHistory = true;
       
+    },
+    setMovieHistory(state, action) {
+      state.movieUserHistory = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -230,5 +231,5 @@ const movieSlice = createSlice({
       })
   },
 });
-export const { openModal, closeModal,activeHistory,deactiveHistory } = movieSlice.actions;
+export const {setMovieHistory, openModal, closeModal,activeHistory,deactiveHistory } = movieSlice.actions;
 export default movieSlice.reducer;

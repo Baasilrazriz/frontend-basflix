@@ -22,6 +22,7 @@ function LoginPage() {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [learn, setLearn] = useState(false);
+  const [errors, setError] = useState(error.message||"");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -36,37 +37,68 @@ function LoginPage() {
     }
   }, [dispatch, navigate]);
 
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+
+  //   if (loginStatus !== "pending" && username && password) {
+  //     await dispatch(loginUser({ username, password })).then((action) => {
+  //       if (rememberMe) {
+  //         Cookies.set("loggedIn", true, { expires: 15 }); // Cookie expires in 1 day
+  //         Cookies.set("username", username, { expires: 15 }); // Cookie expires in 1 day
+  //         Cookies.set(
+  //           "profilePic",
+  //           'data:image/svg+xml,<svg width= "35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" ><rect width="32" height="32" rx="16" fill="%23DB4444" /><path d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+  //           { expires: 15 }
+  //         ); // Cookie expires in 1 day
+  //       }
+  //       else
+  //       {
+  //         Cookies.set("loggedIn", true, { expires: 1/24 }); // Cookie expires in 1 day
+  //         Cookies.set("username", username, { expires: 1/24 }); // Cookie expires in 1 day
+  //         Cookies.set(
+  //           "profilePic",
+  //           'data:image/svg+xml,<svg width= "35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" ><rect width="32" height="32" rx="16" fill="%23DB4444" /><path d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+  //           { expires: 1/24 }
+  //         )
+  //       }
+  //       navigate("/home");
+  //     });
+  //   } else {
+  //     dispatch(setError("Username or password cannot be empty"));
+  //   }
+  // };
   const handleSignIn = async (e) => {
     e.preventDefault();
-
-    if (loginStatus !== "pending" && username && password) {
-      await dispatch(loginUser({ username, password })).then((action) => {
-        if (rememberMe) {
-          Cookies.set("loggedIn", true, { expires: 15 }); // Cookie expires in 1 day
-          Cookies.set("username", username, { expires: 15 }); // Cookie expires in 1 day
-          Cookies.set(
-            "profilePic",
-            'data:image/svg+xml,<svg width= "35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" ><rect width="32" height="32" rx="16" fill="%23DB4444" /><path d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
-            { expires: 15 }
-          ); // Cookie expires in 1 day
-        }
-        else
-        {
-          Cookies.set("loggedIn", true, { expires: 1/24 }); // Cookie expires in 1 day
-          Cookies.set("username", username, { expires: 1/24 }); // Cookie expires in 1 day
-          Cookies.set(
-            "profilePic",
-            'data:image/svg+xml,<svg width= "35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" ><rect width="32" height="32" rx="16" fill="%23DB4444" /><path d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
-            { expires: 1/24 }
-          )
-        }
-        navigate("/home");
-      });
-    } else {
-      dispatch(setError("Username or password cannot be empty"));
+    if (loginStatus === "pending") {
+      setError("Loading")
+    } 
+    else if(loginStatus === "failed")
+      {
+setError("incorect password or username")
+      }
+    else {
+      if (username !== "" && password !== "") {
+        // await dispatch(loginUser({ username, password }));
+        await dispatch(loginUser({ username, password })).then((action) => {
+          if (rememberMe) {
+            Cookies.set("loggedIn", true, { expires: 1 }); // Cookie expires in 1 day
+            Cookies.set("username", username, { expires: 1 }); // Cookie expires in 1 day
+            Cookies.set(
+              "profilePic",
+              'data:image/svg+xml,<svg width= "35" height="35" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" ><rect width="32" height="32" rx="16" fill="%23DB4444" /><path d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 15C17.6569 15 19 13.6569 19 12C19 10.3431 17.6569 9 16 9C14.3431 9 13 10.3431 13 12C13 13.6569 14.3431 15 16 15Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+              { expires: 1 }
+            ); // Cookie expires in 1 day
+          }
+          // dispatch(setUsername(email));
+          navigate("/home");
+          // dispatch(sendEmail({ email }));
+        });
+      } else {
+        dispatch(setError("email or password  canot be empty"));
+      }
     }
-  };
 
+  };
   return (
     <div
       className="relative min-h-screen flex items-center justify-center bg-black bg-cover bg-center"
@@ -81,7 +113,7 @@ function LoginPage() {
       </NavLink>
       <div className="relative z-10 w-full max-w-md bg-black bg-opacity-75 p-6 md:p-8 rounded">
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Sign In</h2>
-        {error && <p className="text-red-500 mb-4">{error.message}</p>}
+        {errors && <p className="text-red-500 mb-4">{errors}</p>}
         <div className="flex justify-center items-center">
           <GoogleLoginButton rememberMe={rememberMe} />
         </div>

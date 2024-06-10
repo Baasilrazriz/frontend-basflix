@@ -48,9 +48,7 @@ function HomePage() {
     <>
       <div className="bg-black min-h-screen">
         <Header />
-          <MovieContent />
-          
-      
+          <MovieContent />      
       </div>
       <MovieModal />
     </>

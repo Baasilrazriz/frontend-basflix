@@ -12,7 +12,7 @@ function SearchContent() {
     return (
         <div className="animate-fade-in pt-28 pb-20 px-14">
             <h2 className="text-4xl text-white mb-6">Search Results for "{searchInput}"</h2>
-            <CarouselSection title={`Results for "${searchInput}"`} movies={moviesByName} />
+            <CarouselSection title={`Results for "${searchInput}"`} movies={moviesByName} search={true}/>
         </div>
     );
 }

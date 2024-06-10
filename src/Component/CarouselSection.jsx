@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal, recommendMoviesByName } from '../Store/Features/movieSlice';
 
-const CarouselSection = ({ title, movies }) => {
+const CarouselSection = ({ title, movies,search }) => {
 
   const dispatch = useDispatch();
   const statusRecommendedMoviesByName = useSelector(
@@ -68,11 +68,12 @@ const CarouselSection = ({ title, movies }) => {
     <div className="py-8">
       <h2 className="text-2xl text-white mb-4">{title}  {movies.movie_title}</h2>
       {statusRecommendedMoviesByName === 'pending'||statusMoviesTopRated==="pending"||statusCatMovies==="pending"||statusRecommendedMovies==="pending" ? <LoadingSkeleton /> : <>
-      <Slider {...settings}>
+      {search?<>
+        <Slider {...settings}>
       {Object.values(movies).map((movie, index) => (
           <div key={index} className="px-2 cursor-pointer" onClick={() => handleMovieClick(movie)}>
             <img 
-              src={movie.poster_url ? movie.poster_url : "https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_SX300.jpg"} 
+              src={movie.poster_url ? movie.poster_url : "https://via.placeholder.com/300x450.png?text=No+Image"} 
               alt={movie.title} 
               className="w-full rounded" 
             />
@@ -81,6 +82,19 @@ const CarouselSection = ({ title, movies }) => {
         ))}
       
       </Slider>
+      </>:<><Slider {...settings}>
+      {Object.values(movies).slice(1).map((movie, index) => (
+          <div key={index} className="px-2 cursor-pointer" onClick={() => handleMovieClick(movie)}>
+            <img 
+              src={movie.poster_url ? movie.poster_url : "https://via.placeholder.com/300x450.png?text=No+Image"} 
+              alt={movie.title} 
+              className="w-full rounded" 
+            />
+            <p className="mt-2 text-white">{movie.title}</p>
+          </div>
+        ))}
+      
+      </Slider></>}
       </>}
       
 

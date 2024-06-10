@@ -108,6 +108,7 @@ const MovieModal = () => {
               <CarouselSection
                 title="More Like This:"
                 movies={moviesByName}
+                search={false}
               />
             )}
             </div>
